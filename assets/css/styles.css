@@ -1,0 +1,38 @@
+.font-shrikhand {
+  font-family: "Shrikhand", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-nunito {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.text-edge {
+  filter: drop-shadow(4px 6px 0px white);
+}
+
+.text-edge-sm {
+  filter: drop-shadow(1px 2px 0px white);
+}
+
+.bg-dotted-grid {
+  background-image: radial-gradient(
+    circle at 0.5rem 0.5rem,
+    #666 1px,
+    transparent 0
+  );
+  background-size: 1rem 1rem;
+  mask-image: linear-gradient(to top, black, transparent 66%);
+}
+
+.hero-gradient {
+  mask-image: linear-gradient(to top right, transparent 10%, black 20%);
+  -webkit-mask-image: linear-gradient(to top right, transparent 10%, black 20%);
+}
+
+.hero-edge {
+  filter: drop-shadow(-4px 6px 0px white);
+}

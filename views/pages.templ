@@ -1,0 +1,74 @@
+package views
+
+templ navItems(classes string) {
+  <nav class={ classes }>
+    <ul class="flex sm:flex-row flex-col gap-3">
+      <li><a class="" href="/">Home</a></li>
+      <li><a href="/portfolio">Porfolio</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+}
+
+func menuURL(referer string) (string, error) {
+  url := referer
+  if url == "" {
+    url = "/menu"
+  }
+
+  return url, nil
+}
+
+templ header(referer string) {
+  <header class="inline-flex items-center justify-between w-full py-3">
+    <div class="font-shrikhand text-xl">tristanmarquise.dev</div>
+
+    @navItems("sm:block hidden")
+
+    if referer == "" {
+     <a class="sm:hidden p-2 h-12 w-12" href="/menu" alt="Open navigation menu">
+      <img src="/assets/img/hamburger.svg" alt="Menu icon"></img>
+     </a>
+    } else {
+      <a class="sm:hidden p-2 h-12 w-12" href={ templ.URL(referer) } alt="Close navigation menu">
+        <img src="/assets/img/close.svg" alt="Close icon"></img>
+      </a>
+    }
+  </header> 
+}
+
+templ hero(classes string, heading string, subheading string, imgAttrs templ.Attributes) {
+  <div class={ "rounded-[3rem] rounded-br-none w-full relative md:p-12 p-6 bg-sky-500 overflow-hidden", classes }>
+    <h1 class="font-shrikhand sm:text-8xl text-5xl md:pt-12 mt-4 text-edge z-10 max-w-[80%]">{ heading }</h1>
+    <p class="md:max-w-[50%] max-w-[75%] font-bold md:pt-8 pt-4 pb-8 sm:text-xl">{ subheading }</p>
+    
+    <div class="absolute top-0 left-0 right-0 bottom-0 bg-dotted-grid"></div>
+    if imgAttrs != nil {
+      <img class="absolute bottom-0 md:right-0 -right-6 max-h-[80%] h-auto md:w-auto w-64 hero-gradient hero-edge contrast-125 grayscale" { imgAttrs... }></img>
+    }
+  </div>
+}
+
+templ IndexPage() {
+  @rootLayout("Home - Tristan Marquise", "", templ.Attributes{"description": "Welcome to my website!", "meta_description": "Hello this is a test meta description"}) {
+    @hero("md:min-h-[36rem] min-h-[28rem]", "Hey, I'm Tristan!", "I'm a full-stack web developer that loves to create solutions that foster joyful and reliable experiences for end users and fellow developers. I have extensive experience with full-stack JavaScript frameworks, UI design and I am now focusing more on Go (this website is brought to you by Go 😉). I am currenly open to new mid-senior level roles, but in the mean time I'll be iterating on this site and working on other side projects that I want to show off soon!", templ.Attributes{"src": "/assets/img/hero.webp", "alt": "Photo of me" })
+  }
+}
+
+templ PortfolioPage() {
+  @rootLayout("Portfolio - Tristan Marquise", "", templ.Attributes{"meta_description": "Hello this is a test meta description"}) {
+    @hero("h-96", "My portfolio", "🚧 Come back soon to see some of my projects and work experience!", nil)
+  }
+}
+
+templ ContactPage() {
+  @rootLayout("Contact - Tristan Marquise", "", templ.Attributes{"meta_description": "Hello this is a test meta description"}) {
+    @hero("h-96", "Contact me", "🚧 Come back soon to see how you can best connect with me!", nil)
+  }
+}
+
+templ MenuPage(referer string) {
+  @rootLayout("Menu - Tristan Marquise", referer, templ.Attributes{"meta_description": "Hello this is a test meta description"}) {
+   @navItems("")
+  }
+}
