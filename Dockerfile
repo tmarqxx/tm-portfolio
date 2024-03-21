@@ -26,4 +26,4 @@ EXPOSE 3000
 
 # USER nonroot:nonroot
 
-ENTRYPOINT [ "/portolio-app" ]
+ENTRYPOINT [ "/portolio-app", "--port", "8080" ]

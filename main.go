@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -36,9 +37,12 @@ func listen(port int) (net.Listener, error) {
 }
 
 func main() {
+	port := flag.Int("port", 3000, "Port to bind HTTP server to")
+	flag.Parse()
+
 	sh := session.NewMiddleware(handlers.NewDefaultMux())
 
-	l, err := listen(3000)
+	l, err := listen(*port)
 	if err != nil {
 		log.Fatal(err)
 	}
