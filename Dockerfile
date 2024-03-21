@@ -22,7 +22,7 @@ WORKDIR /
 COPY --from=build-stage /tmp/bin/portolio-app /portolio-app
 COPY --from=build-stage /app/assets /assets
 
-EXPOSE 3000
+EXPOSE 8080
 
 # USER nonroot:nonroot
 
